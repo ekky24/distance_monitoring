@@ -5,8 +5,8 @@ import numpy as np
 from distance_tracker import DistanceTracker
 from box_tracker import BoxTracker
 
-input_path = 'inputs/input_01.mp4'
-output_path = 'outputs/output_01.avi'
+input_path = 'inputs/input_03.mp4'
+output_path = 'outputs/output_03.avi'
 model_path = 'model/MobileNetSSD_deploy.caffemodel'
 proto_path = 'model/MobileNetSSD_deploy.prototxt'
 
@@ -25,7 +25,7 @@ classes = ["background", "aeroplane", "bicycle", "bird", "boat",
 model = cv2.dnn.readNetFromCaffe(proto_path, model_path)
 vs = cv2.VideoCapture(input_path)
 bt = BoxTracker(maxDisappeared=20, maxDistance=50)
-dt = DistanceTracker(thresh_distance=200, max_contact=30)
+dt = DistanceTracker(thresh_distance=100, max_contact=30)
 
 trackers = []
 distanceTracker = {}
@@ -111,7 +111,7 @@ while True:
 	for (i, (k, v)) in enumerate(info):
 		text = "{}: {}".format(k, v)
 		cv2.putText(frame, text, (10, H - ((i * 20) + 20)),
-			cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 0, 255), 2)
+			cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 2)
 
 	writer.write(frame)
 
